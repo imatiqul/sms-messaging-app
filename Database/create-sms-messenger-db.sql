@@ -1,0 +1,52 @@
+/*DROP DATABASE IF EXISTS SMS_MESSENGER_DB;*/
+
+CREATE DATABASE IF NOT EXISTS SMS_MESSENGER_DB;
+
+USE SMS_MESSENGER_DB;
+
+DROP TABLE IF EXISTS `MESSAGE`;
+DROP TABLE IF EXISTS `SUBSCRIBER`;
+DROP TABLE IF EXISTS `COUNTRY`;
+
+CREATE TABLE IF NOT EXISTS `COUNTRY`(
+`Id` int(11) unsigned NOT NULL auto_increment,
+`Name` varchar(50) NOT NULL,
+`CountryCode` varchar(3)  NOT NULL,
+`MobileCountryCode` varchar(3)  NOT NULL,
+`PricePerSms` decimal(5, 3),
+CONSTRAINT pk_CountryId PRIMARY KEY (`Id`)
+) ENGINE = INNODB;
+
+
+CREATE TABLE IF NOT EXISTS `SUBSCRIBER`(
+`Id` int(11) unsigned NOT NULL auto_increment,
+`CountryId` int(11) unsigned NOT NULL,
+`MobileNumber` varchar(10) NOT NULL,
+CONSTRAINT pk_SubscriberId PRIMARY KEY (`Id`)
+) ENGINE = INNODB;
+
+ALTER TABLE `SUBSCRIBER`
+ADD CONSTRAINT fk_Subscriber_CountryId
+FOREIGN KEY `SUBSCRIBER`(`CountryId`)
+REFERENCES `COUNTRY`(`Id`);
+
+CREATE TABLE IF NOT EXISTS `MESSAGE`(
+`Id` int(11) unsigned NOT NULL auto_increment,
+`SenderId` int(11) unsigned NOT NULL,
+`ReceiverId` int(11) unsigned NOT NULL,
+`Text` text NOT NULL,
+`Type` tinyint NOT NULL DEFAULT 1, 
+`State` tinyint NOT NULL DEFAULT 1,
+`Date` datetime DEFAULT NOW(),
+CONSTRAINT pk_MessageId PRIMARY KEY (`Id`)
+) ENGINE = INNODB;
+
+ALTER TABLE `MESSAGE`
+ADD CONSTRAINT fk_Message_SenderId
+FOREIGN KEY `MESSAGE`(`SenderId`)
+REFERENCES `SUBSCRIBER`(`Id`);
+
+ALTER TABLE `MESSAGE`
+ADD CONSTRAINT fk_Message_ReceiverId
+FOREIGN KEY `MESSAGE`(`ReceiverId`)
+REFERENCES `SUBSCRIBER`(`Id`);

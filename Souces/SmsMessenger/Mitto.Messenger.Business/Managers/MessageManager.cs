@@ -1,11 +1,10 @@
 ﻿using Mitto.Messenger.Core.Dtos;
-using Mitto.Messenger.Core.Interfaces;
 using Mitto.Messenger.Core.Entities;
+using Mitto.Messenger.Core.Enums;
+using Mitto.Messenger.Core.Interfaces;
 using Mitto.Messenger.Data.Repositories;
 using System.Collections.Generic;
 using System.Data;
-using ServiceStack;
-using System;
 
 namespace Mitto.Messenger.Business.Managers
 {
@@ -22,9 +21,25 @@ namespace Mitto.Messenger.Business.Managers
       countryManager = new CountryManager(db);
     }
 
-    public void SaveMessage(MessageDto message)
+    public MessageState SaveMessage(MessageDto message)
     {
+      var state = MessageState.SUCCESS;
 
+      return state;
+    }
+
+    public List<SMSDto> GetSentSMS(SMSFilterDto filter)
+    {
+      var smsList = new List<SMSDto>();
+
+      return smsList;
+    }
+
+    public List<StatisticsDto> GetStatisticsReport(StatisticsFilterDto filter)
+    {
+      var reports = new List<StatisticsDto>();
+
+      return reports;
     }
 
     public void Dispose()

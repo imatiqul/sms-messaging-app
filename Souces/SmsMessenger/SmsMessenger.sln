@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mitto.Messenger.ServiceHost", "Mitto.Messenger.ServiceHost\Mitto.Messenger.ServiceHost\Mitto.Messenger.ServiceHost.csproj", "{4389B305-B381-4B50-B1A8-BBB5259A0524}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mitto.Messenger.Services", "Mitto.Messenger.Services\Mitto.Messenger.Services.csproj", "{6E2CCC98-5430-480C-B646-78FB85573BDC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mitto.Messenger.Data", "Mitto.Messenger.Data\Mitto.Messenger.Data.csproj", "{DDA1469D-9D01-4A7C-8149-2116B783B569}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mitto.Messenger.Business", "Mitto.Messenger.Business\Mitto.Messenger.Business.csproj", "{7C415D56-6D10-4E8C-BBD3-19A0B661B4C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mitto.Messenger.Core", "Mitto.Messenger.Core\Mitto.Messenger.Core.csproj", "{C3861020-E4BB-46D2-8825-CD2D8475B883}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mitto.Messenger.ServiceModel", "Mitto.Messenger.ServiceModel\Mitto.Messenger.ServiceModel.csproj", "{99EE4EDC-B78D-4DE9-916D-C44DAF71EA1E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4389B305-B381-4B50-B1A8-BBB5259A0524}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4389B305-B381-4B50-B1A8-BBB5259A0524}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4389B305-B381-4B50-B1A8-BBB5259A0524}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4389B305-B381-4B50-B1A8-BBB5259A0524}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E2CCC98-5430-480C-B646-78FB85573BDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E2CCC98-5430-480C-B646-78FB85573BDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E2CCC98-5430-480C-B646-78FB85573BDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E2CCC98-5430-480C-B646-78FB85573BDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDA1469D-9D01-4A7C-8149-2116B783B569}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDA1469D-9D01-4A7C-8149-2116B783B569}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDA1469D-9D01-4A7C-8149-2116B783B569}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDA1469D-9D01-4A7C-8149-2116B783B569}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C415D56-6D10-4E8C-BBD3-19A0B661B4C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C415D56-6D10-4E8C-BBD3-19A0B661B4C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C415D56-6D10-4E8C-BBD3-19A0B661B4C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C415D56-6D10-4E8C-BBD3-19A0B661B4C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3861020-E4BB-46D2-8825-CD2D8475B883}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3861020-E4BB-46D2-8825-CD2D8475B883}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3861020-E4BB-46D2-8825-CD2D8475B883}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3861020-E4BB-46D2-8825-CD2D8475B883}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99EE4EDC-B78D-4DE9-916D-C44DAF71EA1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99EE4EDC-B78D-4DE9-916D-C44DAF71EA1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99EE4EDC-B78D-4DE9-916D-C44DAF71EA1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99EE4EDC-B78D-4DE9-916D-C44DAF71EA1E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -7,6 +7,8 @@ using ServiceStack.Data;
 using ServiceStack.MiniProfiler;
 using ServiceStack.MiniProfiler.Data;
 using ServiceStack.OrmLite;
+using ServiceStack.Text;
+using ServiceStack.Validation;
 
 namespace Mitto.Messenger.ServiceHost.Configurations
 {
@@ -20,8 +22,9 @@ namespace Mitto.Messenger.ServiceHost.Configurations
       //Config Plugins
       Plugins.Add(new CorsFeature());
       Plugins.Add(new SwaggerFeature());
-      Plugins.Add(new RequestLogsFeature());
-      Plugins.Add(new PostmanFeature());
+
+      container.RegisterValidators(typeof(SendSMSValidator).Assembly);
+      Plugins.Add(new ValidationFeature());
       //Plugins.RemoveAll(x => x is MetadataFeature);
 
       container.Register<IDbConnectionFactory>(
@@ -34,6 +37,8 @@ namespace Mitto.Messenger.ServiceHost.Configurations
       {
         DatabaseConfig.Initialize(db);
       }
+
+      JsConfig.DateHandler = DateHandler.ISO8601;
     }
   }
 }

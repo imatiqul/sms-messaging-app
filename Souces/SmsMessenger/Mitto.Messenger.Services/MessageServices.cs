@@ -3,7 +3,6 @@ using Mitto.Messenger.Core.Dtos;
 using Mitto.Messenger.ServiceModel;
 using ServiceStack;
 using ServiceStack.FluentValidation;
-using System.Collections.Generic;
 
 namespace Mitto.Messenger.Services
 {
@@ -11,8 +10,8 @@ namespace Mitto.Messenger.Services
   {
     public SendSMSValidator()
     {
-      RuleFor(x => x.From).NotEmpty().WithMessage("Sender cannot be empty.");
-      RuleFor(x => x.To).NotEmpty().WithMessage("Receiver cannot be empty.");
+      RuleFor(x => x.Sender).NotEmpty().WithMessage("Sender cannot be empty.");
+      RuleFor(x => x.Receiver).NotEmpty().WithMessage("Receiver cannot be empty.");
       RuleFor(x => x.Text).NotEmpty().WithMessage("Message cannot be empty.");
     }
   }
@@ -37,11 +36,41 @@ namespace Mitto.Messenger.Services
 
   public class MessageServices : Service
   {
-    public object Any(GetCountries request)
+    public object Get(GetCountries request)
     {
-      using (CountryManager manager = new CountryManager(Db))
+      using (var manager = new CountryManager(Db))
       {
         return manager.GetCountries();
+      }
+    }
+
+    public object Get(SendSMS request)
+    {
+      using (var manager = new MessageManager(Db))
+      {
+        var messageDto = request.ConvertTo<MessageDto>();
+        var state = manager.SaveMessage(messageDto);
+        return new SMSResultDto { State = state };
+      }
+    }
+    
+    public object Get(GetSentSMS request)
+    {
+      using (var manager = new MessageManager(Db))
+      {
+        var filter = request.ConvertTo<SMSFilterDto>();
+        var smsList = manager.GetSentSMS(filter);
+        return new SentSMSDto { SMSList = smsList, TotalSMS = smsList.Count };
+      }
+    }
+
+    public object Get(GetStatistics request)
+    {
+      using (var manager = new MessageManager(Db))
+      {
+        var filter = request.ConvertTo<StatisticsFilterDto>();
+        var reports = manager.GetStatisticsReport(filter);
+        return reports;
       }
     }
   }

@@ -48,6 +48,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -59,11 +60,11 @@
     <Compile Include="Configs\DatabaseConfig.cs" />
     <Compile Include="Dtos\CountryDto.cs" />
     <Compile Include="Dtos\MessageDto.cs" />
-    <Compile Include="Dtos\MessageResponseDto.cs" />
-    <Compile Include="Dtos\SentSMSRequestDto.cs" />
-    <Compile Include="Dtos\SentSMSResponseDto.cs" />
-    <Compile Include="Dtos\StatisticsRequestDto.cs" />
-    <Compile Include="Dtos\StatisticsResponseDto.cs" />
+    <Compile Include="Dtos\SMSResultDto.cs" />
+    <Compile Include="Dtos\SMSFilterDto.cs" />
+    <Compile Include="Dtos\SentSMSDto.cs" />
+    <Compile Include="Dtos\StatisticsFilterDto.cs" />
+    <Compile Include="Dtos\StatisticsDto.cs" />
     <Compile Include="Entities\Country.cs" />
     <Compile Include="Entities\Message.cs" />
     <Compile Include="Entities\Subscriber.cs" />

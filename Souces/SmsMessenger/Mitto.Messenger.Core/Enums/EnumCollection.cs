@@ -5,13 +5,13 @@ namespace Mitto.Messenger.Core.Enums
   [EnumAsInt]
   public enum MessageType
   {
-    SMS = 1
+    Sms = 1
   }
 
   [EnumAsInt]
   public enum MessageState
   {
-    SUCCESS = 1,
-    FAILED
+    Success = 1,
+    Failed
   }
 }

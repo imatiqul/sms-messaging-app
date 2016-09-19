@@ -10,8 +10,10 @@ namespace Mitto.Messenger.Services
   {
     public SendSMSValidator()
     {
-      RuleFor(x => x.Sender).NotEmpty().WithMessage("Sender cannot be empty.");
-      RuleFor(x => x.Receiver).NotEmpty().WithMessage("Receiver cannot be empty.");
+      RuleFor(x => x.From).NotEmpty().WithMessage("Sender cannot be empty.");
+      RuleFor(x => x.From).Length(14).WithMessage("Sender length should be 14.");
+      RuleFor(x => x.To).NotEmpty().WithMessage("Receiver cannot be empty.");
+      RuleFor(x => x.From).Length(14).WithMessage("Receiver length should be 14.");
       RuleFor(x => x.Text).NotEmpty().WithMessage("Message cannot be empty.");
     }
   }

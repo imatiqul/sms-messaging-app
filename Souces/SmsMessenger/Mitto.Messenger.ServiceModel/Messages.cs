@@ -16,10 +16,10 @@ namespace Mitto.Messenger.ServiceModel
   public class SendSMS : IReturn<SMSResultDto>
   {
     [DataMember(Name = "from")]
-    public string Sender { get; set; }
+    public string From { get; set; }
 
     [DataMember(Name = "to")]
-    public string Receiver { get; set; }
+    public string To { get; set; }
 
     [DataMember(Name = "text")]
     public string Text { get; set; }

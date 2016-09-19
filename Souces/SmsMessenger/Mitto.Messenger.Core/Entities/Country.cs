@@ -15,7 +15,7 @@ namespace Mitto.Messenger.Core.Entities
     [StringLength(3)]
     public string MobileCountryCode { get; set; }
 
-    [DecimalLength(3)]
+    [DecimalLength(10, 3)]
     public decimal PricePerSms { get; set; }
   }
 }

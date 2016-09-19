@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Managers\CountryManager.cs" />
     <Compile Include="Managers\MessageManager.cs" />
+    <Compile Include="Managers\SubscriberManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -17,10 +17,10 @@ namespace Mitto.Messenger.Core.Entities
 
     public string Text { get; set; }
 
-    [Default(1)]
+    [Default((int)MessageType.Sms)]
     public MessageType Type { get; set; }
 
-    [Default(1)]
+    [Default((int)MessageState.Success)]
     public MessageState State { get; set; }
 
     public DateTime Date { get; set; }

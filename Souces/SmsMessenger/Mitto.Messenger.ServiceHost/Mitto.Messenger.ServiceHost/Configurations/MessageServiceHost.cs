@@ -9,6 +9,7 @@ using ServiceStack.MiniProfiler.Data;
 using ServiceStack.OrmLite;
 using ServiceStack.Text;
 using ServiceStack.Validation;
+using System.Configuration;
 
 namespace Mitto.Messenger.ServiceHost.Configurations
 {
@@ -28,7 +29,7 @@ namespace Mitto.Messenger.ServiceHost.Configurations
       //Plugins.RemoveAll(x => x is MetadataFeature);
 
       container.Register<IDbConnectionFactory>(
-          c => new OrmLiteConnectionFactory(AppSettings.GetString("ConnectionString"), MySqlDialect.Provider)
+          c => new OrmLiteConnectionFactory(ConfigurationManager.ConnectionStrings["ConnectionString"].ToString(), MySqlDialect.Provider)
           {
             ConnectionFilter = x => new ProfiledDbConnection(x, Profiler.Current)
           });

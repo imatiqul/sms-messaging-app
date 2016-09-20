@@ -15,6 +15,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mitto.Messenger.Core", "Mit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mitto.Messenger.ServiceModel", "Mitto.Messenger.ServiceModel\Mitto.Messenger.ServiceModel.csproj", "{99EE4EDC-B78D-4DE9-916D-C44DAF71EA1E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mitto.Messenger.Client", "Mitto.Messenger.Client\Mitto.Messenger.Client\Mitto.Messenger.Client.csproj", "{E669FB75-4FCC-4213-B151-7C38BD9DF7BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mitto.Messenger.Client.ServiceModel", "Mitto.Messenger.Client\Mitto.Messenger.Client.ServiceModel\Mitto.Messenger.Client.ServiceModel.csproj", "{7E8AF6BE-3F12-4CED-86DD-EC8B924DE1AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mitto.Messenger.Client.ServiceInterface", "Mitto.Messenger.Client\Mitto.Messenger.Client.ServiceInterface\Mitto.Messenger.Client.ServiceInterface.csproj", "{6112FBBF-CF5C-46AC-A526-5CD3A79FA200}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +51,18 @@ Global
 		{99EE4EDC-B78D-4DE9-916D-C44DAF71EA1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99EE4EDC-B78D-4DE9-916D-C44DAF71EA1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99EE4EDC-B78D-4DE9-916D-C44DAF71EA1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E669FB75-4FCC-4213-B151-7C38BD9DF7BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E669FB75-4FCC-4213-B151-7C38BD9DF7BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E669FB75-4FCC-4213-B151-7C38BD9DF7BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E669FB75-4FCC-4213-B151-7C38BD9DF7BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E8AF6BE-3F12-4CED-86DD-EC8B924DE1AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E8AF6BE-3F12-4CED-86DD-EC8B924DE1AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E8AF6BE-3F12-4CED-86DD-EC8B924DE1AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E8AF6BE-3F12-4CED-86DD-EC8B924DE1AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6112FBBF-CF5C-46AC-A526-5CD3A79FA200}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6112FBBF-CF5C-46AC-A526-5CD3A79FA200}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6112FBBF-CF5C-46AC-A526-5CD3A79FA200}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6112FBBF-CF5C-46AC-A526-5CD3A79FA200}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

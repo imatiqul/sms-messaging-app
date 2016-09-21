@@ -1,68 +1,91 @@
 ﻿<!DOCTYPE html>
-<html lang="en-us">
+<html>
 <head>
-  <title>ServiceStack with Razor</title>
-  <style type="text/css">
-    body, h1, h2, input, button {
-      margin: 0;
-      padding: 0;
-      font: 16px 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    }
-
-    .navbar {
-      padding: 0 15px;
-      color: #999;
-      position: relative;
-      min-height: 50px;
-      line-height: 50px;
-      margin-bottom: 20px;
-      border: 1px solid transparent;
-      background-image: linear-gradient(to bottom,#3c3c3c 0,#222 100%);
-      background-repeat: repeat-x;
-      background-color: #222;
-      border-color: #080808;
-    }
-
-    h2 {
-      padding: 0 0 10px 0;
-      font: 36px 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    }
-
-    input {
-      padding: 10px;
-      width: 50%;
-    }
-
-    button {
-      padding: 10px;
-    }
-
-    #content {
-      margin: auto;
-      padding: 30px;
-    }
-  </style>
-  <link rel="stylesheet" href="//kendo.cdn.telerik.com/2016.3.914/styles/kendo.common.min.css">
-  <link rel="stylesheet" href="//kendo.cdn.telerik.com/2016.3.914/styles/kendo.rtl.min.css">
-  <link rel="stylesheet" href="//kendo.cdn.telerik.com/2016.3.914/styles/kendo.default.min.css">
-  <link rel="stylesheet" href="//kendo.cdn.telerik.com/2016.3.914/styles/kendo.mobile.all.min.css">
-  <link rel="stylesheet" href="//kendo.cdn.telerik.com/2016.3.914/styles/kendo.common-bootstrap.min.css">
-  <link rel="stylesheet" href="//kendo.cdn.telerik.com/2016.3.914/styles/kendo.bootstrap.min.css">
+  <title>@ViewBag.Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="//kendo.cdn.telerik.com/2016.3.914/styles/kendo.common-bootstrap.min.css" />
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="//kendo.cdn.telerik.com/2016.3.914/styles/kendo.bootstrap.min.css" />
+  <link rel="stylesheet" href="//kendo.cdn.telerik.com/2016.3.914/styles/kendo.mobile.all.min.css" />
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" />
 
   <script src="//code.jquery.com/jquery-1.12.3.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="//kendo.cdn.telerik.com/2016.3.914/js/angular.min.js"></script>
   <script src="//kendo.cdn.telerik.com/2016.3.914/js/jszip.min.js"></script>
   <script src="//kendo.cdn.telerik.com/2016.3.914/js/kendo.all.min.js"></script>
-  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+  <script src="//kendo.cdn.telerik.com/2016.3.914/js/kendo.timezones.min.js"></script>
+
+  <link rel="stylesheet" href="@Url.Content("~/Content/styles.css")" />
+
+  <!--[if lt IE 9]>
+    <script src="@Url.Content("~/Scripts/vendor/html5shiv.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/vendor/respond.min.js")" type="text/javascript"></script>
+  <![endif]-->
 </head>
 <body>
-  <h1 class="navbar">Messenger Client - SMS Messaging Platform</h1>
-  <div id="content">
-    @RenderBody()
+  <header>
+    <div class="container">
+      <h2 class="col-sm-12 hidden-sm"><i class="fa fa-mobile" aria-hidden="true"></i> SMS Messaging Platform</h2>
+    </div>
+  </header>
+
+  <ul id="menu">
+    <li><a id="send-sms" href="#/send-sms"><i class="fa fa-envelope" aria-hidden="true"></i> Send SMS</a></li>
+    <li><a id="view-sms" href="#/view-sms"><i class="fa fa-inbox" aria-hidden="true"></i> View SMS</a></li>
+    <li><a id="report" href="#/report"><i class="fa fa-list-alt" aria-hidden="true"></i> Report</a></li>
+  </ul>
+  <div class="container">
+    <div id="messanger-app">
+      @RenderBody()
+    </div>
+
+    <footer>Copyright &copy; 2016 <a href="https://www.mitto.ch/">Mitto AG</a>. All rights reserved.</footer>
   </div>
-  <script type="text/javascript">
-    var getCountriesUrl = "@(new GetCountries().ToGetUrl())";
+  <script>
+    // init page controls
+
+    function path(url) {
+      return /(.*\/)[^\/]*$/gi.exec(url)[1];
+    }
+
+    // init sample widgets
+
+    $("#menu").kendoMenu();
+
+    function resizeTabStripContent() {
+      kendo.resize("#tabstrip");
+    }
+
+    $("#tabstrip").kendoTabStrip({
+      animation: {
+        open: { effects: "fadeIn" }
+      }
+    });
+
+    // resize nested charts when window resizes
+    $(window).resize(resizeTabStripContent);
+
+    var countriesApiUrl = "@(new GetCountries().ToGetUrl())";
+    var sendSmsApiUrl = "@(new GetCountries().ToGetUrl())";
+    var viewSmsApiUrl = "@(new GetCountries().ToGetUrl())";
+    var reportApiUrl = "@(new GetCountries().ToGetUrl())";
+
+    var countryDataSource = new kendo.data.DataSource({
+      transport: {
+        read: {
+          url: countriesApiUrl,
+          dataType: "jsonp"
+        }
+      }
+    });
+
+
   </script>
+
+  <script src="@Url.Content("~/Scripts/app/models/send-sms.js")" type="text/javascript"></script>
+  <script src="@Url.Content("~/Scripts/app/models/view-sent-sms.js")" type="text/javascript"></script>
+  <script src="@Url.Content("~/Scripts/app/models/report.js")" type="text/javascript"></script>
   <script src="@Url.Content("~/Scripts/app/main.js")" type="text/javascript"></script>
 </body>
 </html>

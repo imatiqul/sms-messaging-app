@@ -91,6 +91,10 @@
       <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\ServiceStack.Razor.4.5.0\lib\net45\System.Web.Razor.dll</HintPath>
       <Private>True</Private>
@@ -745,6 +749,7 @@
     <Content Include="Content\kendo\2016.3.914\Uniform\sprite_2x.png" />
     <Content Include="Content\kendo\2016.3.914\Uniform\sprite_kpi.png" />
     <Content Include="Content\kendo\2016.3.914\Uniform\sprite_kpi_2x.png" />
+    <Content Include="Content\styles.css" />
     <Content Include="packages.config" />
     <Content Include="Content\kendo\2016.3.914\kendo.uniform.mobile.min.css.map" />
     <Content Include="Content\kendo\2016.3.914\kendo.uniform.min.css.map" />
@@ -1167,6 +1172,9 @@
     <Content Include="Content\kendo\2016.3.914-source\common\transitions.less" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\app\main.js" />
+    <Content Include="Scripts\app\models\report.js" />
+    <Content Include="Scripts\app\models\send-sms.js" />
+    <Content Include="Scripts\app\models\view-sent-sms.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\kendo\2016.3.914\angular.min.js" />
@@ -1724,6 +1732,8 @@
     <Content Include="Scripts\kendo\2016.3.914\messages\kendo.messages.zh-CN.min.js" />
     <Content Include="Scripts\kendo\2016.3.914\messages\kendo.messages.zh-HK.min.js" />
     <Content Include="Scripts\kendo\2016.3.914\messages\kendo.messages.zh-TW.min.js" />
+    <Content Include="Scripts\vendor\html5shiv.js" />
+    <Content Include="Scripts\vendor\respond.min.js" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="default.cshtml" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />

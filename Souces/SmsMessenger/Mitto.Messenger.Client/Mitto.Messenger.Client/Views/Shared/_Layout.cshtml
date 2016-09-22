@@ -9,12 +9,14 @@
   <link rel="stylesheet" href="//kendo.cdn.telerik.com/2016.3.914/styles/kendo.mobile.all.min.css" />
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" />
 
-  <script src="//code.jquery.com/jquery-1.12.3.min.js"></script>
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="//kendo.cdn.telerik.com/2016.3.914/js/angular.min.js"></script>
-  <script src="//kendo.cdn.telerik.com/2016.3.914/js/jszip.min.js"></script>
-  <script src="//kendo.cdn.telerik.com/2016.3.914/js/kendo.all.min.js"></script>
-  <script src="//kendo.cdn.telerik.com/2016.3.914/js/kendo.timezones.min.js"></script>
+  <script type="text/javascript" src="//code.jquery.com/jquery-1.12.3.min.js"></script>
+  <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="//kendo.cdn.telerik.com/2016.3.914/js/angular.min.js"></script>
+  <script type="text/javascript" src="//kendo.cdn.telerik.com/2016.3.914/js/jszip.min.js"></script>
+  <script type="text/javascript" src="//kendo.cdn.telerik.com/2016.3.914/js/kendo.all.min.js"></script>
+  <script type="text/javascript" src="//kendo.cdn.telerik.com/2016.3.914/js/kendo.timezones.min.js"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+  @*<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.map"></script>*@
 
   <link rel="stylesheet" href="@Url.Content("~/Content/styles.css")" />
 
@@ -49,27 +51,12 @@
       return /(.*\/)[^\/]*$/gi.exec(url)[1];
     }
 
-    // init sample widgets
-
     $("#menu").kendoMenu();
 
-    function resizeTabStripContent() {
-      kendo.resize("#tabstrip");
-    }
-
-    $("#tabstrip").kendoTabStrip({
-      animation: {
-        open: { effects: "fadeIn" }
-      }
-    });
-
-    // resize nested charts when window resizes
-    $(window).resize(resizeTabStripContent);
-
     var countriesApiUrl = "@(new GetCountries().ToGetUrl())";
-    var sendSmsApiUrl = "@(new GetCountries().ToGetUrl())";
-    var viewSmsApiUrl = "@(new GetCountries().ToGetUrl())";
-    var reportApiUrl = "@(new GetCountries().ToGetUrl())";
+    var sendSmsApiUrl = "@(new SendSMS().ToGetUrl())";
+    var viewSmsApiUrl = "@(new GetSentSMS().ToGetUrl())";
+    var reportApiUrl = "@(new GetStatistics().ToGetUrl())";
 
     var countryDataSource = new kendo.data.DataSource({
       transport: {
@@ -79,8 +66,6 @@
         }
       }
     });
-
-
   </script>
 
   <script src="@Url.Content("~/Scripts/app/models/send-sms.js")" type="text/javascript"></script>

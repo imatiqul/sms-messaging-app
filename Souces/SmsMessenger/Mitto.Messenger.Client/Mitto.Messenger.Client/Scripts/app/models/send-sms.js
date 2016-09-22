@@ -1,8 +1,15 @@
 ﻿// models
 var sendSMSViewModel = kendo.observable({
 
+  sms: {
+    message: "",
+    senderCountry: null,
+    senderMobile: "",
+    receiverCountry: null,
+    receiverMobile: ""
+  },
+
   init: function () {
-    console.log("view init");
 
     $("#ddl-sender-country").kendoDropDownList({
       dataTextField: "name",
@@ -34,9 +41,34 @@ var sendSMSViewModel = kendo.observable({
   show: function () {
     console.log("view show");
   },
-
   sendSmsClick: function (e) {
     alert("sendSmsClick clicked");
+    var _sms = this.get("sms");
+    var sender = '+' + _sms.senderCountry.cc + _sms.senderCountry.mcc + _sms.senderMobile;
+    var receiver = '+' + _sms.receiverCountry.cc + _sms.receiverCountry.mcc + _sms.receiverMobile;
+
+    var smsRequest = [
+      from = sender,
+      to = receiver,
+      text = _sms.message
+    ];
+
+    $.ajax({
+      type: "GET",
+      url: sendSmsApiUrl + '?from='+encodeURIComponent(sender)+'&to='+encodeURIComponent(receiver)+'&text='+encodeURIComponent(text),
+      dataType: "json",
+      contentType: 'application/json; charset=utf-8',
+      error: function (xhr) {
+        alert('Error: ' + xhr.statusText);
+      },
+      success: function (result) {
+        console.log(result);
+      },
+      async: true,
+      processData: false
+    });
+
+
     goToViewSentSms(e);
   },
   cancelClick: function (e) {

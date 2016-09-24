@@ -10,7 +10,7 @@ namespace Mitto.Messenger.Core.Entities
     [ForeignKey(typeof(Country))]
     public int CountryId { get; set; }
 
-    [StringLength(8)]
+    [StringLength(9)]
     public string MobileNumber { get; set; }
   }
 }

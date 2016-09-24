@@ -16,7 +16,7 @@
 </script>
 
 <script id="send-sms-template" type="text/x-kendo-template">
-  <section class="well">
+  <section class="well" id="send-sms-form">
     <h2 class="ra-well-title">Send SMS</h2>
     <div class="form-horizontal form-widgets col-sm-12">
       <div class="form-group">
@@ -24,7 +24,7 @@
         <div class="col-sm-10">
           <div class="input-group" style="width:100%">
             <select id="ddl-sender-country" data-bind="value: sms.senderCountry" style="width:20%"></select>
-            <input id="sender-mobile-number" type="text" placeholder="Enter mobile number" data-value-update="keyup" data-bind="value: sms.senderMobile" style="width:80%" />
+            <input id="sender-mobile-number" type="tel" placeholder="Enter mobile number" data-value-update="keyup" data-bind="value: sms.senderMobile" style="width:80%" required pattern="\d{10}" validationMessage="Plase enter{0}"  />
           </div>
         </div>
       </div>
@@ -36,7 +36,7 @@
         <div class="col-sm-10">
           <div class="input-group" style="width:100%">
             <select id="ddl-receiver-country" data-bind="value: sms.receiverCountry" style="width:20%"></select>
-            <input id="receiver-mobile-number" type="text" placeholder="Enter mobile number" data-value-update="keyup" data-bind="value: sms.receiverMobile" style="width:80%" />
+            <input id="receiver-mobile-number" type="tel" placeholder="Enter mobile number" data-value-update="keyup" data-bind="value: sms.receiverMobile" style="width:80%"  required pattern="\d{10}" validationMessage="Plase enter{0}" />
           </div>
         </div>
       </div>
@@ -46,7 +46,7 @@
       <div class="form-group">
         <label class="control-label col-sm-2" for="bio">Message</label>
         <div class="col-sm-10">
-          <textarea id="sms-text" data-bind="value: sms.message" class="k-textbox"></textarea>
+          <textarea id="sms-text" data-bind="value: sms.message" class="k-textbox"  required ></textarea>
         </div>
       </div>
     </div>

@@ -1,14 +1,4 @@
 ﻿$(document).ready(function () {
-
-  $(document).ajaxStart(function () {
-    kendo.ui.progress($(document.body), true);
-  });
-
-  $(document).ajaxComplete(function () {
-    kendo.ui.progress($(document.body), false);
-  });
-
-
   // views, layouts
   var layout = new kendo.Layout("<div id='content'></div>");
 
@@ -17,8 +7,7 @@
   var report = new kendo.View("report-template", { model: reportViewModel, init: reportViewModel.init.bind(reportViewModel), show: reportViewModel.show.bind(reportViewModel) });
 
   // routing
-  var router = new kendo.Router();
-
+  
   router.bind("init", function () {
     layout.render($("#messanger-app"));
   });

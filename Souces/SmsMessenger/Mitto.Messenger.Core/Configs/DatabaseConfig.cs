@@ -8,6 +8,7 @@ namespace Mitto.Messenger.Core.Configs
   {
     public static void Initialize(IDbConnection db)
     {
+      #region Drop Tables
       if (db.TableExists<Message>())
       {
         db.DropTable<Message>();
@@ -20,6 +21,7 @@ namespace Mitto.Messenger.Core.Configs
       {
         db.DropTable<Country>();
       }
+      #endregion
 
       if (db.CreateTableIfNotExists<Country>())
         AddCountries(db);

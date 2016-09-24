@@ -20,9 +20,8 @@ namespace Mitto.Messenger.Client
     /// </summary>
     public override void Configure(Container container)
     {
-      //Config examples
-      //this.Plugins.Add(new PostmanFeature());
-      //this.Plugins.Add(new CorsFeature());
+      //Config Plugins
+      Plugins.Add(new CorsFeature());
 
       this.Plugins.Add(new RazorFormat());
     }

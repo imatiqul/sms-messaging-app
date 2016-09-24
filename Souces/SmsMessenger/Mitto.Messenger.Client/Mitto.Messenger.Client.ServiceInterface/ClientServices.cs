@@ -14,33 +14,66 @@ namespace Mitto.Messenger.Client.ServiceInterface
       get
       {
         var appSettings = new AppSettings();
-        return appSettings.Get("MessageServiceAPIUrl");
+        return "http://{0}".Fmt(appSettings.Get("MessageServiceAPIUrl"));
+      }
+    }
+
+    public string Extension
+    {
+      get
+      {
+        var appSettings = new AppSettings();
+        return appSettings.Get("MessageServiceAPIExtension");
       }
     }
 
     public object Any(GetCountries request)
     {
-      return "http://{0}/countries.json".Fmt(ServiceUrl)
+      var apiUrl = "/countries";
+
+      return "{0}{1}.{2}".Fmt(ServiceUrl, apiUrl, Extension)
         .GetJsonFromUrl()
         .FromJson<List<CountryDto>>();
     }
 
     public object Any(SendSMS request)
     {
-      var client = new JsonServiceClient("http://{0}".Fmt(ServiceUrl));
-      return client.Get<SMSResultDto>("/sms/send.json?from={0}&to={1}&text={2}".Fmt(Uri.EscapeDataString(request.From), Uri.EscapeDataString(request.To), Uri.EscapeDataString(request.Text)));
+      var apiUrl = "/sms/send";
+
+      var url = "{0}{1}.{2}".Fmt(ServiceUrl, apiUrl, Extension);
+      url = url.AddQueryParam("from", request.From);
+      url = url.AddQueryParam("to", request.To);
+      url = url.AddQueryParam("text", request.Text);
+
+      return url.GetJsonFromUrl()
+       .FromJson<SMSResultDto>();
     }
 
     public object Any(GetSentSMS request)
     {
-      var client = new JsonServiceClient("http://{0}{1}".Fmt(ServiceUrl, "/sms/sent.json"));
-      return client.Get<SentSMSDto>(request);
+      var apiUrl = "/sms/sent";
+
+      var url = "{0}{1}.{2}".Fmt(ServiceUrl, apiUrl, Extension);
+      url = url.AddQueryParam("from", request.From);
+      url = url.AddQueryParam("to", request.To);
+      url = url.AddQueryParam("skip", request.Skip);
+      url = url.AddQueryParam("take", request.Take);
+
+      return url.GetJsonFromUrl()
+       .FromJson<SentSMSDto>();
     }
 
     public object Any(GetStatistics request)
     {
-      var client = new JsonServiceClient("http://{0}{1}".Fmt(ServiceUrl, "/sms/statistics.json"));
-      return client.Get<List<StatisticsDto>>(request);
+      var apiUrl = "/statistics";
+
+      var url = "{0}{1}.{2}".Fmt(ServiceUrl, apiUrl, Extension);
+      url = url.AddQueryParam("from", request.From);
+      url = url.AddQueryParam("to", request.To);
+      url = url.AddQueryParam("mccList", request.MobileCountryCodeList);
+
+      return url.GetJsonFromUrl()
+       .FromJson<List<StatisticsDto>>();
     }
   }
 }

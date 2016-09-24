@@ -39,6 +39,9 @@
   </ul>
   <div class="container">
     <div id="messanger-app">
+      <div id="message-summary">
+
+      </div>
       @RenderBody()
     </div>
 
@@ -66,6 +69,16 @@
         }
       }
     });
+    var router = new kendo.Router();
+
+    $(document).ajaxStart(function () {
+      kendo.ui.progress($(document.body), true);
+    });
+
+    $(document).ajaxComplete(function () {
+      kendo.ui.progress($(document.body), false);
+    });
+
   </script>
 
   <script src="@Url.Content("~/Scripts/app/models/send-sms.js")" type="text/javascript"></script>

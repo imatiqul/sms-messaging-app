@@ -28,7 +28,9 @@ namespace Mitto.Messenger.Data.Repositories.Base
 
     public List<T> Get(Expression<Func<T, bool>> exp, int? skip, int? take)
     {
-      var query = db.From<T>().Where(exp).Limit(skip, take);
+      var query = db.From<T>().Where(exp);
+      if ((skip.HasValue && skip.Value > 0) && (take.HasValue && take.Value > 0))
+        query = query.Limit(skip, take);
       return db.Select(query);
     }
 

@@ -20,11 +20,21 @@
     <h2 class="ra-well-title">Send SMS</h2>
     <div class="form-horizontal form-widgets col-sm-12">
       <div class="form-group">
+        <label class="control-label col-sm-2" for="country">Select Country</label>
+        <div class="col-sm-10">
+          <div class="input-group" style="width:100%">
+            <select id="ddl-country" name="country" data-bind="value: sms.country" style="width:30%"></select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="form-horizontal form-widgets col-sm-12">
+      <div class="form-group">
         <label class="control-label col-sm-2" for="sender-mobile-number">Sender</label>
         <div class="col-sm-10">
           <div class="input-group" style="width:100%">
-            <select id="ddl-sender-country" data-bind="value: sms.senderCountry" style="width:20%"></select>
-            <input id="sender-mobile-number" type="tel" placeholder="Enter mobile number" data-value-update="keyup" data-bind="value: sms.senderMobile" style="width:80%" required pattern="\d{10}" validationMessage="Plase enter{0}"  />
+            <input id="sender-mobile-number" type="tel" placeholder="Enter mobile number" data-value-update="keyup" data-bind="value: sms.senderMobile" style="width:60%" required pattern="\d{10}" validationMessage="Plase enter{0}"  />
           </div>
         </div>
       </div>
@@ -35,8 +45,7 @@
         <label class="control-label col-sm-2" for="receiver-mobile-number">Receiver</label>
         <div class="col-sm-10">
           <div class="input-group" style="width:100%">
-            <select id="ddl-receiver-country" data-bind="value: sms.receiverCountry" style="width:20%"></select>
-            <input id="receiver-mobile-number" type="tel" placeholder="Enter mobile number" data-value-update="keyup" data-bind="value: sms.receiverMobile" style="width:80%"  required pattern="\d{10}" validationMessage="Plase enter{0}" />
+            <input id="receiver-mobile-number" type="tel" placeholder="Enter mobile number" data-value-update="keyup" data-bind="value: sms.receiverMobile" style="width:60%"  required pattern="\d{10}" validationMessage="Plase enter{0}" />
           </div>
         </div>
       </div>

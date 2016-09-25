@@ -2,9 +2,8 @@
 var sendSMSViewModel = kendo.observable({
   sms: {
     message: "",
-    senderCountry: null,
+    country: null,
     senderMobile: "",
-    receiverCountry: null,
     receiverMobile: ""
   },
 
@@ -48,17 +47,7 @@ var sendSMSViewModel = kendo.observable({
   validator: $('#send-sms-form').kendoValidator().data('kendoValidator'),
 
   init: function () {
-    $("#ddl-sender-country").kendoDropDownList({
-      dataTextField: "name",
-      dataValueField: "mcc",
-      template: kendo.template($("#ddl-country-template").html()),
-      dataSource: countryDataSource,
-      noDataTemplate: 'No Country Found!',
-      change: function (e) {
-      }
-    });
-
-    $("#ddl-receiver-country").kendoDropDownList({
+    $("#ddl-country").kendoDropDownList({
       dataTextField: "name",
       dataValueField: "mcc",
       template: kendo.template($("#ddl-country-template").html()),
@@ -94,13 +83,13 @@ var sendSMSViewModel = kendo.observable({
   },
 
   sendSmsClick: function (e) {
-    if (!this.validate()) {
-      return -1;
-    }
+    //if (!this.validate()) {
+    //  return -1;
+    //}
 
     var _sms = this.get("sms");
-    var sender = _sms.senderCountry.cc + _sms.senderCountry.mcc + _sms.senderMobile;
-    var receiver = _sms.receiverCountry.cc + _sms.receiverCountry.mcc + _sms.receiverMobile;
+    var sender = _sms.country.cc + _sms.country.mcc + _sms.senderMobile;
+    var receiver = _sms.country.cc + _sms.country.mcc + _sms.receiverMobile;
 
     var smsRequest = {
       from: sender,
@@ -122,9 +111,8 @@ var sendSMSViewModel = kendo.observable({
   clearClick: function (e) {
     this.set("sms", {
       message: "",
-      senderCountry: null,
+      country: null,
       senderMobile: "",
-      receiverCountry: null,
       receiverMobile: ""
     })
   },

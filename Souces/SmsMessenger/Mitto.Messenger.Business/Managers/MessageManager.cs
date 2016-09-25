@@ -92,7 +92,7 @@ namespace Mitto.Messenger.Business.Managers
             var sender = subscriberList.Find(x => x.Id == message.SenderId);
             var receiver = subscriberList.Find(x => x.Id == message.ReceiverId);
             var country = countryList.Find(x => x.Id == sender.CountryId);
-            var smsCount = Math.Floor(((decimal)message.Text.Length / 160));
+            var smsCount = Math.Ceiling(((decimal)message.Text.Length / 160));
 
             var sms = new SMSDto
             {
@@ -113,8 +113,13 @@ namespace Mitto.Messenger.Business.Managers
     public List<StatisticsDto> GetStatisticsReport(StatisticsFilterDto filter)
     {
       var reports = new List<StatisticsDto>();
+      var countries = new List<CountryDto>();
 
-      var countries = countryManager.GetAllByMobileCountryCodes(filter.MobileCountryCodeList);
+      if (filter.MobileCountryCodeList !=null && filter.MobileCountryCodeList.Count > 0)
+        countries = countryManager.GetAllByMobileCountryCodes(filter.MobileCountryCodeList);
+      else
+        countries = countryManager.GetCountries();
+
       var subscribers = subscriberManager.GetAllByCountryIds(countries.Select(x => x.Id).ToList());
       var subscriberIds = subscribers.Select(x => x.Id).ToList();
       var messageList = repository.Get(x => (x.Date >= filter.From && x.Date <= filter.To && subscriberIds.Contains(x.SenderId))).OrderBy(x => x.Date.ToString("yyyy-MM-dd"));
@@ -127,7 +132,7 @@ namespace Mitto.Messenger.Business.Managers
                      Date = message.Date.ToString("yyyy-MM-dd"),
                      MCC = country.MobileCountryCode,
                      PricePerSMS = country.PricePerSms,
-                     Price = Math.Floor(((decimal)message.Text.Length / 160)) * country.PricePerSms
+                     Price = Math.Ceiling(((decimal)message.Text.Length / 160)) * country.PricePerSms
                    });
 
       reports = (from res in query

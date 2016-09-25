@@ -9,18 +9,18 @@ namespace Mitto.Messenger.Core.Configs
     public static void Initialize(IDbConnection db)
     {
       #region Drop Tables
-      if (db.TableExists<Message>())
-      {
-        db.DropTable<Message>();
-      }
-      if (db.TableExists<Subscriber>())
-      {
-        db.DropTable<Subscriber>();
-      }
-      if (db.TableExists<Country>())
-      {
-        db.DropTable<Country>();
-      }
+      //if (db.TableExists<Message>())
+      //{
+      //  db.DropTable<Message>();
+      //}
+      //if (db.TableExists<Subscriber>())
+      //{
+      //  db.DropTable<Subscriber>();
+      //}
+      //if (db.TableExists<Country>())
+      //{
+      //  db.DropTable<Country>();
+      //}
       #endregion
 
       if (db.CreateTableIfNotExists<Country>())

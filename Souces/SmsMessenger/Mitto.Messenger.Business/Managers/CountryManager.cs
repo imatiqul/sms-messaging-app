@@ -30,6 +30,11 @@ namespace Mitto.Messenger.Business.Managers
       return null;
     }
 
+    public List<CountryDto> GetAllByMobileCountryCodes(List<string> mccList)
+    {
+      return repository.Get(x=>mccList.Contains(x.MobileCountryCode)).ConvertAll(x => x.ConvertTo<CountryDto>());
+    }
+
     public void Dispose()
     {
       repository = null;

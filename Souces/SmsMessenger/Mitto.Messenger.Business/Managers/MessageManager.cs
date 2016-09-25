@@ -6,7 +6,7 @@ using Mitto.Messenger.Data.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using ServiceStack;
+using System.Linq;
 
 namespace Mitto.Messenger.Business.Managers
 {
@@ -35,7 +35,8 @@ namespace Mitto.Messenger.Business.Managers
         mobileCountryCode = message.Receiver.MobileCountryCode;
         mobileNumber = message.Receiver.MobileNumber;
       }
-      else {
+      else
+      {
         countryCode = message.Sender.CountryCode;
         mobileCountryCode = message.Sender.MobileCountryCode;
         mobileNumber = message.Sender.MobileNumber;
@@ -43,7 +44,7 @@ namespace Mitto.Messenger.Business.Managers
 
       var countryDto = countryManager.GetByCountryAndMobileCountryCode(countryCode, mobileCountryCode);
 
-      SubscriberDto subscriberDto = subscriberManager.GetByCountrAndMobileNumber(countryDto.Id, mobileNumber);
+      SubscriberDto subscriberDto = subscriberManager.GetByCountryAndMobileNumber(countryDto.Id, mobileNumber);
       if (subscriberDto == null)
       {
         subscriberDto = Activator.CreateInstance<SubscriberDto>();
@@ -82,12 +83,66 @@ namespace Mitto.Messenger.Business.Managers
     {
       var smsList = new List<SMSDto>();
 
+      var messageList = repository.Get(x => (x.Date >= filter.From && x.Date <= filter.To), filter.Skip, filter.Take);
+      var subscriberList = subscriberManager.GetAll();
+      var countryList = countryManager.GetCountries();
+
+      messageList.ForEach(message =>
+          {
+            var sender = subscriberList.Find(x => x.Id == message.SenderId);
+            var receiver = subscriberList.Find(x => x.Id == message.ReceiverId);
+            var country = countryList.Find(x => x.Id == sender.CountryId);
+            var smsCount = Math.Floor(((decimal)message.Text.Length / 160));
+
+            var sms = new SMSDto
+            {
+              DateTime = message.Date,
+              Receiver = sender.MobileNumber,
+              Sender = receiver.MobileNumber,
+              MobileCountryCode = country.MobileCountryCode,
+              Price = smsCount * country.PricePerSms,
+              State = message.State
+            };
+
+            smsList.Add(sms);
+          });
+
       return smsList;
     }
 
     public List<StatisticsDto> GetStatisticsReport(StatisticsFilterDto filter)
     {
       var reports = new List<StatisticsDto>();
+
+      var countries = countryManager.GetAllByMobileCountryCodes(filter.MobileCountryCodeList);
+      var subscribers = subscriberManager.GetAllByCountryIds(countries.Select(x => x.Id).ToList());
+      var subscriberIds = subscribers.Select(x => x.Id).ToList();
+      var messageList = repository.Get(x => (x.Date >= filter.From && x.Date <= filter.To && subscriberIds.Contains(x.SenderId))).OrderBy(x => x.Date.ToString("yyyy-MM-dd"));
+
+      var query = (from message in messageList
+                   join subscriber in subscribers on message.SenderId equals subscriber.Id
+                   join country in countries on subscriber.CountryId equals country.Id
+                   select new
+                   {
+                     Date = message.Date.ToString("yyyy-MM-dd"),
+                     MCC = country.MobileCountryCode,
+                     PricePerSMS = country.PricePerSms,
+                     Price = Math.Floor(((decimal)message.Text.Length / 160)) * country.PricePerSms
+                   });
+
+      reports = (from res in query
+                 let countryKey = new { mcc = res.MCC, price = res.PricePerSMS }
+                 orderby res.Date
+                 group res by new { res.MCC, res.Date } into grp
+                 select new StatisticsDto
+                 {
+                   Day = DateTime.Parse(grp.Key.Date),
+                   MobileCountryCode = grp.Key.MCC,
+                   Count = grp.Count(),
+                   PricePerSms = countries.Single(x => x.MobileCountryCode == grp.Key.MCC).PricePerSms,
+                   TotalPrice = grp.Sum(x => x.Price)
+                 }
+                ).ToList();
 
       return reports;
     }

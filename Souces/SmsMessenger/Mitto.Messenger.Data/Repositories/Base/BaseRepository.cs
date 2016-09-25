@@ -26,6 +26,12 @@ namespace Mitto.Messenger.Data.Repositories.Base
       return db.Select(exp);
     }
 
+    public List<T> Get(Expression<Func<T, bool>> exp, int? skip, int? take)
+    {
+      var query = db.From<T>().Where(exp).Limit(skip, take);
+      return db.Select(query);
+    }
+
     public virtual T GetById(int id)
     {
       var o = db.SingleById<T>(id);

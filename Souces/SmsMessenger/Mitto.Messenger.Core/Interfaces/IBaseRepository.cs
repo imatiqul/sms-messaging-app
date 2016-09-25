@@ -21,6 +21,10 @@ namespace Mitto.Messenger.Core.Interfaces
     /// </summary>
     List<T> Get(Expression<Func<T, bool>> exp);
     /// <summary>
+    /// Get elements that comply to the specified criteria with/without paging
+    /// </summary>
+    List<T> Get(Expression<Func<T, bool>> exp, int? skip, int? take);
+    /// <summary>
     /// Get an instance of T with the specified id
     /// </summary>
     T GetById(int id);

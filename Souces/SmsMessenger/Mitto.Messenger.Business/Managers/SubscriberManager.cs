@@ -5,6 +5,7 @@ using Mitto.Messenger.Data.Repositories;
 using System;
 using ServiceStack;
 using System.Data;
+using System.Collections.Generic;
 
 namespace Mitto.Messenger.Business.Managers
 {
@@ -24,7 +25,7 @@ namespace Mitto.Messenger.Business.Managers
       return subscriber.ConvertTo<SubscriberDto>();
     }
 
-    public SubscriberDto GetByCountrAndMobileNumber(int countryId, string mobileNumber)
+    public SubscriberDto GetByCountryAndMobileNumber(int countryId, string mobileNumber)
     {
       var senderSubscriberList = subscriberRepository.Get(x => x.CountryId == countryId && x.MobileNumber == mobileNumber);
       if (senderSubscriberList != null && senderSubscriberList.Count > 0)
@@ -34,9 +35,20 @@ namespace Mitto.Messenger.Business.Managers
       return null;
     }
 
+    public List<SubscriberDto> GetAll()
+    {
+      return subscriberRepository.GetAll().ConvertAll(x => x.ConvertTo<SubscriberDto>());
+    }
+
+    public List<SubscriberDto> GetAllByCountryIds(List<int> countries)
+    {
+      return subscriberRepository.Get(x=> countries.Contains(x.CountryId)).ConvertAll(x => x.ConvertTo<SubscriberDto>());
+    }
+
     public void Dispose()
     {
       subscriberRepository = null;
     }
+
   }
 }
